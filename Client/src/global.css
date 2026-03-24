@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-tertiary: #5b5b85;
+  --color-inverse-surface: #0b0f0f;
+  --color-on-background: #2c3435;
+  --color-primary: #36628f;
+  --color-primary-dim: #285583;
+  --color-background: #f8fafa;
+  --color-tertiary-dim: #4f4f78;
+  --color-secondary-dim: #455560;
+  --color-on-primary: #f7f9ff;
+  --color-surface-variant: #dde4e4;
+  --color-on-secondary-fixed-variant: #4d5e69;
+  --color-on-tertiary: #fbf7ff;
+  --color-secondary-fixed-dim: #c5d7e4;
+  --color-inverse-on-surface: #9b9d9e;
+  --color-on-error-container: #6e0a12;
+  --color-tertiary-container: #cccafb;
+  --color-surface-container: #eaefef;
+  --color-error-container: #fa746f;
+  --color-surface-container-lowest: #ffffff;
+  --color-error: #a83836;
+  --color-on-secondary-container: #43545f;
+  --color-primary-fixed: #9dc7fb;
+  --color-on-tertiary-container: #42426a;
+  --color-on-secondary: #f4faff;
+  --color-secondary: #50616c;
+  --color-secondary-fixed: #d3e5f2;
+  --color-on-tertiary-fixed: #2e2e55;
+  --color-surface: #f8fafa;
+  --color-inverse-primary: #9dc7fb;
+  --color-surface-tint: #36628f;
+  --color-outline: #757c7d;
+  --color-tertiary-fixed: #cccafb;
+  --color-primary-container: #9dc7fb;
+  --color-surface-dim: #d4dbdc;
+  --color-on-secondary-fixed: #31414c;
+  --color-on-tertiary-fixed-variant: #4b4b73;
+  --color-on-error: #fff7f6;
+  --color-tertiary-fixed-dim: #bebdec;
+  --color-surface-container-low: #f0f4f4;
+  --color-on-surface-variant: #596061;
+  --color-on-primary-fixed: #002b4e;
+  --color-surface-container-high: #e3e9ea;
+  --color-on-primary-fixed-variant: #194976;
+  --color-primary-fixed-dim: #8fb9ec;
+  --color-surface-container-highest: #dde4e4;
+  --color-on-surface: #2c3435;
+  --color-outline-variant: #acb3b4;
+  --color-error-dim: #67040d;
+  --color-on-primary-container: #09406c;
+  --color-secondary-container: #d3e5f2;
+  --color-surface-bright: #f8fafa;
+
+  --font-family-headline: Plus Jakarta Sans;
+  --font-family-body: Manrope;
+  --font-family-label: Manrope;
+
+  --border-radius: 1rem;
+  --border-radius-lg: 2rem;
+  --border-radius-xl: 3rem;
+  --border-radius-full: 9999px;
+}
+
+@layer components {
+  .glass-nav {
+    @apply bg-white/70 backdrop-blur-lg border-b border-slate-200/50 supports-[backdrop-filter]:bg-white/50;
+  }
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 font-['Plus_Jakarta_Sans'];
+}
+
+  .creamy-gradient {
+        background: linear-gradient(135deg, #36628f 0%, #9dc7fb 100%);
+  }
+
+  .glass-nav {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(24px);
+      }
+  .shadow-ambient {
+        box-shadow: 0 12px 32px rgba(54, 98, 143, 0.06);
+      }
+
+  .surface-container-low {
+        background-color: #f0f4f4;
+  }
+
+  .surface-container-lowest {
+        background-color: #ffffff;
+  }

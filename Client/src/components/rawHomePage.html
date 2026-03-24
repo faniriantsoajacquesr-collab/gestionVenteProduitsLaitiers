@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact Us | Alpine Creamery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary": "#5b5b85",
+              "inverse-surface": "#0b0f0f",
+              "on-background": "#2c3435",
+              "primary": "#36628f",
+              "primary-dim": "#285583",
+              "background": "#f8fafa",
+              "tertiary-dim": "#4f4f78",
+              "secondary-dim": "#455560",
+              "on-primary": "#f7f9ff",
+              "surface-variant": "#dde4e4",
+              "on-secondary-fixed-variant": "#4d5e69",
+              "on-tertiary": "#fbf7ff",
+              "secondary-fixed-dim": "#c5d7e4",
+              "inverse-on-surface": "#9b9d9e",
+              "on-error-container": "#6e0a12",
+              "tertiary-container": "#cccafb",
+              "surface-container": "#eaefef",
+              "error-container": "#fa746f",
+              "surface-container-lowest": "#ffffff",
+              "error": "#a83836",
+              "on-secondary-container": "#43545f",
+              "primary-fixed": "#9dc7fb",
+              "on-tertiary-container": "#42426a",
+              "on-secondary": "#f4faff",
+              "secondary": "#50616c",
+              "secondary-fixed": "#d3e5f2",
+              "on-tertiary-fixed": "#2e2e55",
+              "surface": "#f8fafa",
+              "inverse-primary": "#9dc7fb",
+              "surface-tint": "#36628f",
+              "outline": "#757c7d",
+              "tertiary-fixed": "#cccafb",
+              "primary-container": "#9dc7fb",
+              "surface-dim": "#d4dbdc",
+              "on-secondary-fixed": "#31414c",
+              "on-tertiary-fixed-variant": "#4b4b73",
+              "on-error": "#fff7f6",
+              "tertiary-fixed-dim": "#bebdec",
+              "surface-container-low": "#f0f4f4",
+              "on-surface-variant": "#596061",
+              "on-primary-fixed": "#002b4e",
+              "surface-container-high": "#e3e9ea",
+              "on-primary-fixed-variant": "#194976",
+              "primary-fixed-dim": "#8fb9ec",
+              "surface-container-highest": "#dde4e4",
+              "on-surface": "#2c3435",
+              "outline-variant": "#acb3b4",
+              "error-dim": "#67040d",
+              "on-primary-container": "#09406c",
+              "secondary-container": "#d3e5f2",
+              "surface-bright": "#f8fafa"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        vertical-align: middle;
+      }
+      .glass-nav {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(24px);
+      }
+      .creamy-gradient {
+        background: linear-gradient(135deg, #36628f 0%, #9dc7fb 100%);
+      }
+      .shadow-ambient {
+        box-shadow: 0 12px 32px rgba(54, 98, 143, 0.06);
+      }
+    </style>
+</head>
+<body class="bg-background font-body text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 glass-nav shadow-sm shadow-sky-900/5">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto font-['Plus_Jakarta_Sans'] tracking-tight">
+<div class="text-2xl font-bold tracking-tighter text-sky-900 dark:text-sky-100">
+                Alpine Creamery
+            </div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-slate-600 dark:text-slate-400 hover:text-sky-600 transition-colors hover:scale-105 transition-transform duration-300" href="#">Home</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-sky-600 transition-colors hover:scale-105 transition-transform duration-300" href="#">Explore</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-sky-600 transition-colors hover:scale-105 transition-transform duration-300" href="#">About Us</a>
+<a class="text-sky-700 dark:text-sky-400 font-bold border-b-2 border-sky-600 pb-1 hover:scale-105 transition-transform duration-300" href="#">Contact</a>
+</div>
+<div class="flex items-center space-x-5">
+<button class="text-sky-700 dark:text-sky-400 transition-all active:opacity-80 active:scale-95">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+<button class="text-sky-700 dark:text-sky-400 transition-all active:opacity-80 active:scale-95">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-20 px-6 max-w-screen-2xl mx-auto">
+<div class="mb-16 text-center">
+<span class="font-label text-xs font-bold tracking-[0.1em] uppercase text-primary mb-4 block">Get In Touch</span>
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter text-on-surface mb-6">Let's start a <span class="text-primary italic">fresh</span> conversation.</h1>
+<p class="max-w-2xl mx-auto text-lg text-on-surface-variant leading-relaxed">Whether you have questions about our alpine farms or want to stock our premium dairy, our family is here to help.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+<!-- Left Column: Contact Form -->
+<div class="lg:col-span-5 flex flex-col gap-8">
+<div class="bg-surface-container-lowest p-10 rounded-xl shadow-ambient">
+<form action="#" class="space-y-6">
+<div class="space-y-2">
+<label class="font-label text-[0.75rem] font-bold tracking-[0.1em] uppercase text-on-surface-variant px-4">Full Name</label>
+<input class="w-full px-6 py-4 bg-surface-container-low border-none rounded-full focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all placeholder:text-outline-variant outline-none" placeholder="Julian Alpine" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label text-[0.75rem] font-bold tracking-[0.1em] uppercase text-on-surface-variant px-4">Email Address</label>
+<input class="w-full px-6 py-4 bg-surface-container-low border-none rounded-full focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all placeholder:text-outline-variant outline-none" placeholder="hello@alpinecreamery.com" type="email"/>
+</div>
+<div class="space-y-2">
+<label class="font-label text-[0.75rem] font-bold tracking-[0.1em] uppercase text-on-surface-variant px-4">Your Message</label>
+<textarea class="w-full px-6 py-4 bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all placeholder:text-outline-variant outline-none resize-none" placeholder="Tell us how we can help..." rows="5"></textarea>
+</div>
+<button class="w-full creamy-gradient text-on-primary font-bold py-5 rounded-full hover:scale-[1.02] hover:shadow-lg transition-all active:scale-95" type="submit">
+                            Send Message
+                        </button>
+</form>
+</div>
+<!-- Contact Shortcut Cards -->
+<div class="grid grid-cols-2 gap-4">
+<a class="group bg-surface-container-low p-6 rounded-xl flex flex-col items-center justify-center text-center hover:bg-surface-container-lowest transition-all border border-transparent hover:border-primary/10" href="#">
+<div class="w-12 h-12 rounded-full bg-primary-container/30 flex items-center justify-center text-primary mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="chat" style="font-variation-settings: 'FILL' 1;">chat</span>
+</div>
+<span class="font-headline font-bold text-on-surface">WhatsApp</span>
+<span class="text-sm text-on-surface-variant">Instant Support</span>
+</a>
+<a class="group bg-surface-container-low p-6 rounded-xl flex flex-col items-center justify-center text-center hover:bg-surface-container-lowest transition-all border border-transparent hover:border-primary/10" href="#">
+<div class="w-12 h-12 rounded-full bg-primary-container/30 flex items-center justify-center text-primary mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="mail" style="font-variation-settings: 'FILL' 1;">mail</span>
+</div>
+<span class="font-headline font-bold text-on-surface">Email Us</span>
+<span class="text-sm text-on-surface-variant">24h Response</span>
+</a>
+</div>
+</div>
+<!-- Right Column: Minimalist Map & Details -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<div class="relative h-[500px] lg:h-full w-full rounded-xl overflow-hidden shadow-ambient">
+<div class="absolute inset-0 bg-slate-200">
+<img class="w-full h-full object-cover grayscale opacity-80 mix-blend-multiply" data-alt="Minimalist aerial map view of a clean mountain valley with soft morning fog and scattered alpine cottages" data-location="Swiss Alps" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC00mmkSDh-mSoWjz37LdyTZAs-rKovbOf7Roq9dudwyaJhAFlcMrqeKVlCkgnkuYoPqlS9hfq68-piPKZazlZ_SAvC3pyrzNLtbxabQtBxrJpe9zACroWwgRwXN9IVr1yUWHPq4jLsnDVO9MO25Zj-V4PSE13_Z6_NBL09IcPpFHMvfymxAmLbal4baUZ-KGY2UCXzQGyc8EeUhRaHH_JMPvXMdj-Rl9e1udsZjOaKWvoLoUga6orkni7kwTNcemI7ah1SQfB1po0"/>
+</div>
+<!-- Map Pin Overlay -->
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="relative">
+<div class="absolute inset-0 animate-ping rounded-full bg-primary/20 scale-150"></div>
+<div class="relative bg-white p-4 rounded-full shadow-xl flex items-center justify-center border-4 border-primary-container">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+</div>
+</div>
+<!-- Location Card -->
+<div class="absolute bottom-6 left-6 right-6 md:right-auto md:w-80 glass-nav p-6 rounded-lg shadow-lg">
+<h3 class="font-headline font-bold text-primary mb-1">Alpine Flagship Dairy</h3>
+<p class="text-sm text-on-surface-variant mb-4">122 Creamery Lane, Vals, Switzerland</p>
+<div class="flex items-center text-xs font-label font-bold tracking-wider uppercase text-on-surface">
+<span class="material-symbols-outlined text-sm mr-2" data-icon="schedule">schedule</span>
+                            Open 08:00 - 18:00
+                        </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Section: Values -->
+<div class="mt-32 grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-outline-variant/10 pt-20">
+<div class="space-y-4">
+<h4 class="font-headline text-xl font-bold">Pure Origins</h4>
+<p class="text-on-surface-variant leading-relaxed">Our cattle graze on pesticide-free pastures at 1,200 meters above sea level, ensuring the purest mineral content in every drop.</p>
+</div>
+<div class="space-y-4">
+<h4 class="font-headline text-xl font-bold">Sustainable Vessel</h4>
+<p class="text-on-surface-variant leading-relaxed">We utilize 100% circular glass packaging and renewable hydro-power for our processing facilities.</p>
+</div>
+<div class="space-y-4">
+<h4 class="font-headline text-xl font-bold">Direct Delivery</h4>
+<p class="text-on-surface-variant leading-relaxed">From the pasture to your doorstep in less than 12 hours. The shortest supply chain in the industry.</p>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-12 py-10 gap-6">
+<div class="text-lg font-bold text-slate-900 dark:text-slate-100 font-['Plus_Jakarta_Sans']">
+                Alpine Creamery
+            </div>
+<div class="flex flex-wrap justify-center gap-8 font-['Manrope'] text-sm tracking-wide uppercase">
+<a class="text-slate-500 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-400 transition-colors hover:underline decoration-sky-200" href="#">Privacy Policy</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-400 transition-colors hover:underline decoration-sky-200" href="#">Terms of Service</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-400 transition-colors hover:underline decoration-sky-200" href="#">Shipping</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-400 transition-colors hover:underline decoration-sky-200" href="#">Sustainability</a>
+</div>
+<div class="text-slate-500 dark:text-slate-400 text-sm font-['Manrope']">
+                © 2024 Alpine Creamery. Purely Crafted.
+            </div>
+</div>
+</footer>
+</body></html>
