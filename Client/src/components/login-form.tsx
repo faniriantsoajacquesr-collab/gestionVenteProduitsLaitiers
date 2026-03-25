@@ -1,13 +1,14 @@
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/UI/button"
 import {
   Field,
   FieldDescription,
   FieldGroup,
   FieldLabel,
   FieldSeparator,
-} from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
+} from "@/components/UI/field"
+import { Input } from "@/components/UI/input"
+import PrimaryBtn from "./UI/PrimaryBtn"
 
 export function LoginForm({
   className,
@@ -39,7 +40,7 @@ export function LoginForm({
           <Input id="password" type="password" required />
         </Field>
         <Field>
-          <Button type="submit">Login</Button>
+          <PrimaryBtn displayText="Login" />
         </Field>
         <FieldSeparator>Or continue with</FieldSeparator>
         <Field>
