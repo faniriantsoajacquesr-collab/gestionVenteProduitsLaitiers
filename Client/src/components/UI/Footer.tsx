@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Footer ()
 {
     return(
@@ -7,10 +9,10 @@ export default function Footer ()
                                 Alpine Creamery
                 </div>
                 <div className="flex flex-wrap justify-center gap-8 font-['Manrope'] text-sm tracking-wide uppercase">
-                    <a className="text-slate-500  hover:text-sky-600  transition-colors hover:underline decoration-sky-200" href="#">Privacy Policy</a>
-                    <a className="text-slate-500  hover:text-sky-600  transition-colors hover:underline decoration-sky-200" href="#">Terms of Service</a>
-                    <a className="text-slate-500  hover:text-sky-600  transition-colors hover:underline decoration-sky-200" href="#">Shipping</a>
-                    <a className="text-slate-500  hover:text-sky-600  transition-colors hover:underline decoration-sky-200" href="#">Sustainability</a>
+                    <Link className="text-slate-500  hover:text-sky-600  transition-colors hover:underline decoration-sky-200" to="#">Privacy Policy</Link>
+                    <Link className="text-slate-500  hover:text-sky-600  transition-colors hover:underline decoration-sky-200" to="#">Terms of Service</Link>
+                    <Link className="text-slate-500  hover:text-sky-600  transition-colors hover:underline decoration-sky-200" to="#">Shipping</Link>
+                    <Link className="text-slate-500  hover:text-sky-600  transition-colors hover:underline decoration-sky-200" to="#">Sustainability</Link>
                 </div>
                 <div className="text-slate-500 dark:text-slate-400 text-sm font-['Manrope']">
                                 © 2024 Alpine Creamery. Purely Crafted.

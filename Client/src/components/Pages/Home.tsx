@@ -1,7 +1,9 @@
-import { Leaf, Recycle, Truck, ChevronLeft, ChevronRight, Plus, Check } from 'lucide-react';
+import { Leaf, Recycle, Truck, ChevronLeft, ChevronRight, Plus, Check, Link, ShoppingBag } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import PrimaryBtn from "../UI/PrimaryBtn";
 
 export default function Home() {
+    const navigate = useNavigate();
     return (
         <main className="pt-24">
             {/* Hero Section */}
@@ -15,7 +17,8 @@ export default function Home() {
                         <p className="text-body-lg text-on-surface-variant mb-10 max-w-md leading-relaxed">
                             Experience the purity of high-altitude pastures. We bring the creamery to your doorstep with zero-waste packaging and organic integrity.
                         </p>
-                        <PrimaryBtn displayText="Shop Now" />
+                        <PrimaryBtn displayText="Shop Now" onClick={() => navigate('/products')} icon={<ShoppingBag size={20} />} />
+                       
                     </div>
                     <div className="lg:col-span-7 relative">
                         <div className="absolute -top-20 -right-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
