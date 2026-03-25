@@ -8,7 +8,7 @@ import {
   FieldSeparator,
 } from "@/components/UI/field"
 import { Input } from "@/components/UI/input"
-import PrimaryBtn from "./UI/PrimaryBtn"
+import PrimaryBtn from "./PrimaryBtn"
 
 export function LoginForm({
   className,
