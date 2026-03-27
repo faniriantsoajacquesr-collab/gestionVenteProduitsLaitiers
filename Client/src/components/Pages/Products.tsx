@@ -1,45 +1,6 @@
 import Sidebar from "../UI/Sidebar";
 import ProductCard from "../UI/ProductCard";
 
-const products = [
-    {
-        name: "Alpine Gruyère",
-        description: "Aged 12 months, nutty & robust.",
-        price: "$12.50",
-        imageUrl: "https://images.unsplash.com/photo-1628636637371-ed334a54ad7c?q=80&w=1887&auto=format&fit=crop",
-    },
-    {
-        name: "Fresh Goat Cheese",
-        description: "Creamy, tangy, and spreadable.",
-        price: "$8.00",
-        imageUrl: "https://images.unsplash.com/photo-1559598467-f8b76c8155d0?q=80&w=1887&auto=format&fit=crop",
-    },
-    {
-        name: "Organic Whole Milk",
-        description: "Glass Bottle (1L), full cream.",
-        price: "$4.50",
-        imageUrl: "https://images.unsplash.com/photo-1563637135-2235113479b2?q=80&w=1887&auto=format&fit=crop",
-    },
-    {
-        name: "Cultured Butter",
-        description: "Slightly tangy, rich flavor.",
-        price: "$6.00",
-        imageUrl: "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?q=80&w=2070&auto=format&fit=crop",
-    },
-    {
-        name: "Greek Yogurt",
-        description: "Thick, creamy, and high in protein.",
-        price: "$5.25",
-        imageUrl: "https://images.unsplash.com/photo-1562119479-204452b893a9?q=80&w=1887&auto=format&fit=crop",
-    },
-    {
-        name: "Sheep's Milk Feta",
-        description: "Salty and briny, perfect for salads.",
-        price: "$9.75",
-        imageUrl: "https://images.unsplash.com/photo-1626962193229-a8f04c6f3557?q=80&w=1887&auto=format&fit=crop",
-    },
-];
-
 
 export default function Products() {
     return (
