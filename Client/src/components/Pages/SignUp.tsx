@@ -5,26 +5,24 @@ import { Field, FieldDescription, FieldGroup, FieldLabel, FieldSeparator } from 
 import { Input } from "../UI/input"
 import PrimaryBtn from "../UI/PrimaryBtn"
 import { Button } from "../UI/button"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
-export default function LoginPage() {
+export default function SignUpPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const navigate = useNavigate()
 
-  const handleSignIn = async (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault() // Stop the page from refreshing
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signUp({
       email: email,
       password: password,
     })
 
     if (error) {
-      alert(error.message)
-      console.log(error.message) // Tell the user what went wrong
+      alert(error.message) // Tell the user what went wrong
     } else {
-      navigate("/")
+      alert ("Account created successfully. Please check up your e-mail notification for confirmation") // Let the user know they signed in successfully
     }
   }
 
@@ -44,9 +42,9 @@ export default function LoginPage() {
             <form className="flex flex-col gap-6">
             <FieldGroup>
               <div className="flex flex-col items-center gap-1 text-center">
-                <h1 className="text-2xl font-bold">Login to your account</h1>
+                <h1 className="text-2xl font-bold">Sign up</h1>
                 <p className="text-sm text-balance text-muted-foreground">
-                  Enter your email below to login to your account
+                  Enter your email below to Sign up 
                 </p>
               </div>
               <Field>
@@ -56,17 +54,11 @@ export default function LoginPage() {
               <Field>
                 <div className="flex items-center">
                   <FieldLabel htmlFor="password">Password</FieldLabel>
-                  <a
-                    href="#"
-                    className="ml-auto text-sm underline-offset-4 hover:underline"
-                  >
-                    Forgot your password?
-                  </a>
                 </div>
                 <Input id="password" type="password" required onChange={(e)=> setPassword(e.target.value)} />
               </Field>
               <Field>
-                <PrimaryBtn displayText="Sign In" onClick={handleSignIn} />
+                <PrimaryBtn displayText="Sign Up" onClick={handleSignUp} />
               </Field>
               <FieldSeparator>Or continue with</FieldSeparator>
               <Field>
@@ -77,12 +69,12 @@ export default function LoginPage() {
                       fill="currentColor"
                     />
                   </svg>
-                  Login with Google
+                  Sign Up with Google
                 </Button>
                 <FieldDescription className="text-center">
-                  Don&apos;t have an account?{" "}
-                  <Link to="/signUp" className="underline underline-offset-4">
-                    Sign up
+                  Already have an account?{" "}
+                  <Link to="/login" className="underline underline-offset-4">
+                    Login
                   </Link>
                 </FieldDescription>
               </Field>

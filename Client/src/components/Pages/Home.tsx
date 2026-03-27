@@ -1,4 +1,4 @@
-import { Leaf, Recycle, Truck, ChevronLeft, ChevronRight, Plus, Check, Link, ShoppingBag } from 'lucide-react';
+import { Leaf, Recycle, Truck, ChevronLeft, ChevronRight, Plus, Check, ShoppingBag } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import PrimaryBtn from "../UI/PrimaryBtn";
 

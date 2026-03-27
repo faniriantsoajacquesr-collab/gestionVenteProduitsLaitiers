@@ -3,7 +3,8 @@ import App from './App';
 import Home from './components/Pages/Home';
 import Products from './components/Pages/Products';
 import Contact from './components/Pages/Contact';
-import Login from './components/Pages/Login';
+import SignUpPage from './components/Pages/SignUp';
+import LoginPage from './components/Pages/Login';
 
 
 export const routes: RouteObject[] = [
@@ -27,6 +28,10 @@ export const routes: RouteObject[] = [
     },
     {
         path: '/login',
-        element: <Login />
+        element: <LoginPage />
+    },
+    {
+        path: '/signUp',
+        element: <SignUpPage/>
     }
 ];

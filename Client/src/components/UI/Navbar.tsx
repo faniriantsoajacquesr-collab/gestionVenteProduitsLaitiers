@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { DropdownMenuAvatar } from "./ProfileBtn";
 function Navbar (){
    return(
     <nav className="fixed top-0 w-full z-50 glass-nav shadow-sm shadow-sky-900/5">
@@ -35,9 +36,7 @@ function Navbar (){
                 <button className="text-sky-700 dark:text-sky-400 transition-all active:opacity-80 active:scale-95">
                     <span className="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
                 </button>
-                <button className="text-sky-700 dark:text-sky-400 transition-all active:opacity-80 active:scale-95">
-                    <span className="material-symbols-outlined" data-icon="person">person</span>
-                </button>
+                <DropdownMenuAvatar />
             </div>
         </div>
     </nav>
