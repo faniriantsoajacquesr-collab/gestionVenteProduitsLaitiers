@@ -5,11 +5,12 @@ interface ProductCardProps {
     description: string;
     price: string;
     imageUrl: string;
+    onOpen?: () => void;
 }
 
-export default function ProductCard({ name, description, price, imageUrl }: ProductCardProps) {
+export default function ProductCard({ name, description, price, imageUrl, onOpen }: ProductCardProps) {
     return (
-        <div className="group bg-surface-container-lowest rounded-xl p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+        <div onClick={onOpen} className="group bg-surface-container-lowest rounded-xl p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer">
             <div className="relative aspect-[4/5] bg-surface-container-low rounded-lg overflow-hidden mb-6">
                 <img src={imageUrl} alt={name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
