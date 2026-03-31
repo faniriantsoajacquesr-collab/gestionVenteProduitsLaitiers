@@ -7,11 +7,11 @@ import cors from 'cors';
 import morgan from 'morgan'; // For logging requests in the terminal
 
 // Import Routers
-import authRoutes from './routes/authRoutes.js';
-import productRoutes from './routes/productRoutes.js';
-import cartRoutes from './routes/cartRoutes.js';
-import orderRoutes from './routes/orderRoutes.js';
-import userRoutes from './routes/userRoutes.js';
+import authRoutes from './client/routes/authRoutes.js';
+import productRoutes from './client/routes/productRoutes.js';
+import cartRoutes from './client/routes/cartRoutes.js';
+import orderRoutes from './client/routes/orderRoutes.js';
+import userRoutes from './client/routes/userRoutes.js';
 
 import { supabase } from './config/supabase.js';
 

@@ -1,4 +1,4 @@
-import { supabase } from '../config/supabase.js';
+import { supabase } from '../../config/supabase.js';
 
 // 1. GET ALL USERS (Admin Only - to see the customer list)
 export const getAllUsers = async (req, res) => {
