@@ -13,6 +13,8 @@ import cartRoutes from './routes/cartRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 
+import { supabase } from './config/supabase.js';
+
 const app = express();
 
 // --- 1. GLOBAL MIDDLEWARE ---
@@ -29,6 +31,12 @@ app.use(morgan('dev'));
 
 // Parse incoming JSON requests
 app.use(express.json());
+
+// Global middleware to attach Supabase client to the request object
+app.use((req, res, next) => {
+  req.supabase = supabase;
+  next();
+});
 
 // --- 2. MOUNT ROUTES ---
 

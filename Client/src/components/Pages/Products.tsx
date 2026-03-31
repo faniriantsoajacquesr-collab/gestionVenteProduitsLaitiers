@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import Sidebar from "../UI/Sidebar";
 import ProductCard from "../UI/ProductCard";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import ProductModal from "../UI/productModal";
+import { useSidebar } from "../../contexts/SidebarContext";
+import { supabase } from "@/lib/supabase";
 
 interface Product {
     id: string;
@@ -27,19 +28,31 @@ export default function Products() {
     const [error, setError] = useState<string | null>(null);
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const { isCollapsed } = useSidebar();
 
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch("http://localhost:5000/api/products");
+                // Get session in case the route is protected
+                const { data: { session } } = await supabase.auth.getSession();
+                
+                const response = await fetch("http://localhost:5000/api/products", {
+                    headers: {
+                        ...(session ? { "Authorization": `Bearer ${session.access_token}` } : {})
+                    }
+                });
+
                 if (!response.ok) {
-                    throw new Error("Failed to fetch products from the server");
+                    // Try to get specific error message from server body
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.error || `Server Error: ${response.status} ${response.statusText}`);
                 }
+
                 const data = await response.json();
                 setProducts(data);
             } catch (err) {
                 setError(err instanceof Error ? err.message : "An error occurred");
-                console.error("Fetch error:", err);
+                console.error("Detailed Fetch error:", err);
             } finally {
                 setIsLoading(false);
             }
@@ -64,19 +77,20 @@ export default function Products() {
     }
 
     return (
-        <main className="pt-32 pb-20 px-6 md:px-12 max-w-screen-2xl mx-auto relative">
-            <ProductModal 
-                product={selectedProduct} 
-                isOpen={isModalOpen} 
-                onClose={() => setIsModalOpen(false)} 
+        <main className={`pt-32 pb-20 px-6 md:px-12 max-w-screen-2xl mx-auto relative transition-all duration-300 ${
+          isCollapsed ? 'ml-16' : 'ml-64'
+        }`}>
+            <ProductModal
+                product={selectedProduct}
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
             />
-            
-            <div className="flex flex-col md:flex-row gap-12">
-                <Sidebar />
+
+            <div className="flex flex-col md:flex-row gap-12 mt-4">
                 <section className="flex-1">
                     <header className="flex justify-between items-end mb-10">
                         <div>
-                            <h2 className="font-headline text-4xl font-extrabold tracking-tighter text-on-surface">Our Artisanal Collection</h2>
+                            <h2 className="font-headline text-4xl font-extrabold tracking-tighter text-on-surface">Our products</h2>
                             <p className="text-on-surface-variant font-body mt-2">Crafted with care, from fresh milk to aged cheeses.</p>
                         </div>
                         <div className="hidden lg:block text-right">

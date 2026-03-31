@@ -5,6 +5,7 @@ import LoadingSpinner from "./components/UI/LoadingSpinner"
 import Navbar from "./components/UI/Navbar"
 import { supabase } from "./lib/supabase"
 import { useEffect, useState } from "react"
+import CartSidebar from "./components/UI/CartSidebar"
 import Login from "./components/Pages/Login"
 
 
@@ -35,6 +36,7 @@ function App() {
        {user ? (
          <>
            <Navbar />
+           <CartSidebar />
            {navigation.state === "loading" && <LoadingSpinner />}
            <Outlet />
            <Footer />

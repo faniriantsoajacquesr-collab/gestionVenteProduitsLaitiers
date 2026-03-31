@@ -148,7 +148,10 @@ export default function ProductNavbar({
           <Button
             variant="ghost"
             size="sm"
-            onClick={onToggleCollapse}
+            onClick={() => {
+              setPendingAction("search")
+              onToggleCollapse?.()
+            }}
             className="w-full h-10 p-0 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container"
             title="Search"
           >
@@ -160,7 +163,10 @@ export default function ProductNavbar({
           <Button
             variant="ghost"
             size="sm"
-            onClick={onToggleCollapse}
+            onClick={() => {
+              setPendingAction("category")
+              onToggleCollapse?.()
+            }}
             className="w-full h-10 p-0 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container"
             title="Product Category"
           >
@@ -170,7 +176,10 @@ export default function ProductNavbar({
           <Button
             variant="ghost"
             size="sm"
-            onClick={onToggleCollapse}
+            onClick={() => {
+              setPendingAction("milkType")
+              onToggleCollapse?.()
+            }}
             className="w-full h-10 p-0 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container"
             title="Milk Type"
           >
@@ -180,7 +189,10 @@ export default function ProductNavbar({
           <Button
             variant="ghost"
             size="sm"
-            onClick={onToggleCollapse}
+            onClick={() => {
+              setPendingAction("dietary")
+              onToggleCollapse?.()
+            }}
             className="w-full h-10 p-0 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container"
             title="Dietary"
           >
@@ -195,6 +207,7 @@ export default function ProductNavbar({
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-outline-variant pointer-events-none" />
             <Input
+              ref={inputRef}
               type="text"
               placeholder="Search products..."
               value={searchQuery}
@@ -247,8 +260,6 @@ export default function ProductNavbar({
           </div>
         </div>
       )}
-
-      
 
     </aside>
   )

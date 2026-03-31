@@ -1,18 +1,23 @@
-import { supabase } from '../config/supabase.js';
-
 export const createOrder = async (req, res) => {
   const userId = req.user.id;
   const { deliveryAddress, deliveryDate } = req.body;
 
   try {
+    const db = req.supabase;
+
+    if (!db) {
+      return res.status(500).json({ error: "Supabase client not initialized in middleware" });
+    }
+
     // 1. GET THE CART ITEMS
-    const { data: cartItems, error: cartError } = await supabase
+    const { data: cartItems, error: cartError } = await db
       .from('cart_items')
       .select(`
+        cart_id,
         quantity,
+        carts!inner(user_id),
         products (id, name, price, unit)
       `)
-      .innerJoin('carts', 'cart_items.cart_id', 'carts.id')
       .eq('carts.user_id', userId);
 
     if (cartError || !cartItems.length) {
@@ -25,7 +30,7 @@ export const createOrder = async (req, res) => {
     }, 0);
 
     // 3. CREATE THE ORDER HEADER
-    const { data: order, error: orderError } = await supabase
+    const { data: order, error: orderError } = await db
       .from('orders')
       .insert([{ 
         user_id: userId, 
@@ -48,28 +53,36 @@ export const createOrder = async (req, res) => {
       unit_bought: item.products.unit
     }));
 
-    const { error: itemsError } = await supabase
+    const { error: itemsError } = await db
       .from('order_items')
       .insert(orderItemsData);
 
     if (itemsError) throw itemsError;
 
-    // 5. CLEAR THE CART
-    await supabase
+    // 5. CLEAR THE CART (Using the ID we already fetched)
+    const cartId = cartItems[0].cart_id;
+    await db
       .from('cart_items')
       .delete()
-      .eq('cart_id', (await supabase.from('carts').select('id').eq('user_id', userId).single()).data.id);
+      .eq('cart_id', cartId);
 
     res.status(201).json({ message: 'Commande réussie !', orderId: order.id });
 
   } catch (err) {
+    console.error("Order Creation Error:", err);
     res.status(500).json({ error: err.message });
   }
 };
 
 // GET ORDER HISTORY (For the Client)
 export const getMyOrders = async (req, res) => {
-  const { data, error } = await supabase
+  const db = req.supabase;
+
+  if (!db) {
+    return res.status(500).json({ error: "Supabase client not initialized in middleware" });
+  }
+
+  const { data, error } = await db
     .from('orders')
     .select('*, order_items(*, products(name))')
     .eq('user_id', req.user.id)

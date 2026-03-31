@@ -4,6 +4,7 @@ import Home from './components/Pages/Home';
 import Products from './components/Pages/Products';
 import Contact from './components/Pages/Contact';
 import SignUpPage from './components/Pages/SignUp';
+import CheckoutPage from './components/Pages/CheckoutPage';
 import LoginPage from './components/Pages/Login';
 
 
@@ -23,6 +24,10 @@ export const routes: RouteObject[] = [
             {
                 path: 'contact',
                 element: <Contact />,
+            },
+            {
+                path: 'checkout',
+                element: <CheckoutPage />,
             },
         ],
     },

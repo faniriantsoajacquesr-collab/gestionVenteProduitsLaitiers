@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { X, Plus, Minus, ShoppingBag, Check } from "lucide-react";
+import { X, Plus, Minus, ShoppingBag, Check, Loader2 } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 interface Product {
     id: string;
@@ -26,8 +27,45 @@ interface ProductModalProps {
 export default function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
     const [selectedImage, setSelectedImage] = useState(0);
     const [quantity, setQuantity] = useState(1);
+    const [isAdding, setIsAdding] = useState(false);
 
     if (!isOpen || !product) return null;
+
+    const handleAddToCart = async () => {
+        setIsAdding(true);
+        try {
+            const { data: { session } } = await supabase.auth.getSession();
+            
+            if (!session) {
+                alert("Please log in to add items to your cart.");
+                return;
+            }
+
+            const response = await fetch("http://localhost:5000/api/cart/add", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${session.access_token}`
+                },
+                body: JSON.stringify({
+                    productId: product.id,
+                    quantity: quantity
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || "Failed to add item to cart");
+            }
+
+            alert(`${product.name} has been added to your cart!`);
+            onClose();
+        } catch (err: any) {
+            alert(err.message || "Something went wrong. Please try again.");
+        } finally {
+            setIsAdding(false);
+        }
+    };
 
     return (
         <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 md:p-6">
@@ -88,16 +126,32 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                     <div className="mt-auto space-y-6">
                         <div className="flex items-center gap-6">
                             <div className="flex items-center border border-outline-variant rounded-full px-2 py-1">
-                                <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="p-2 hover:text-primary transition-colors"><Minus size={18} /></button>
+                                <button 
+                                    onClick={() => setQuantity(q => Math.max(1, q - 1))} 
+                                    disabled={isAdding}
+                                    className="p-2 hover:text-primary transition-colors disabled:opacity-50"
+                                >
+                                    <Minus size={18} />
+                                </button>
                                 <span className="w-10 text-center font-bold">{quantity}</span>
-                                <button onClick={() => setQuantity(q => q + 1)} className="p-2 hover:text-primary transition-colors"><Plus size={18} /></button>
+                                <button 
+                                    onClick={() => setQuantity(q => Math.min(product.stock_quantity, q + 1))} 
+                                    disabled={isAdding}
+                                    className="p-2 hover:text-primary transition-colors disabled:opacity-50"
+                                >
+                                    <Plus size={18} />
+                                </button>
                             </div>
                             <p className="text-sm text-outline font-medium">In Stock: {product.stock_quantity}</p>
                         </div>
                         
-                        <button className="w-full creamy-gradient text-on-primary font-bold py-4 rounded-full hover:scale-[1.02] hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-3">
-                            <ShoppingBag size={20} />
-                            Add {quantity} to Cart • {(product.price * quantity).toLocaleString()} Ar
+                        <button 
+                            onClick={handleAddToCart}
+                            disabled={isAdding || product.stock_quantity === 0}
+                            className="w-full creamy-gradient text-on-primary font-bold py-4 rounded-full hover:scale-[1.02] hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed"
+                        >
+                            {isAdding ? <Loader2 className="animate-spin" size={20} /> : <ShoppingBag size={20} />}
+                            {isAdding ? "Adding to cart..." : `Add ${quantity} to Cart • ${(product.price * quantity).toLocaleString()} Ar`}
                         </button>
                     </div>
                 </div>
