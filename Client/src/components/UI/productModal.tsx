@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { X, Plus, Minus, ShoppingBag, Check, Loader2 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { toast } from "sonner";
 
 interface Product {
     id: string;
@@ -22,9 +23,10 @@ interface ProductModalProps {
     product: Product | null;
     isOpen: boolean;
     onClose: () => void;
+    onRefresh?: () => Promise<void>;
 }
 
-export default function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
+export default function ProductModal({ product, isOpen, onClose, onRefresh }: ProductModalProps) {
     const [selectedImage, setSelectedImage] = useState(0);
     const [quantity, setQuantity] = useState(1);
     const [isAdding, setIsAdding] = useState(false);
@@ -37,7 +39,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
             const { data: { session } } = await supabase.auth.getSession();
             
             if (!session) {
-                alert("Please log in to add items to your cart.");
+                toast.error("Veuillez vous connecter pour ajouter des articles au panier.");
                 return;
             }
 
@@ -58,10 +60,13 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                 throw new Error(errorData.error || "Failed to add item to cart");
             }
 
-            alert(`${product.name} has been added to your cart!`);
+            toast.success(`${product.name} a été ajouté au panier !`);
             onClose();
+            if (onRefresh) {
+                await onRefresh();
+            }
         } catch (err: any) {
-            alert(err.message || "Something went wrong. Please try again.");
+            toast.error(err.message || "Une erreur est survenue.");
         } finally {
             setIsAdding(false);
         }
@@ -142,7 +147,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                                     <Plus size={18} />
                                 </button>
                             </div>
-                            <p className="text-sm text-outline font-medium">In Stock: {product.stock_quantity}</p>
+                            <p className="text-sm text-outline font-medium">En Stock: {product.stock_quantity}</p>
                         </div>
                         
                         <button 
@@ -151,7 +156,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                             className="w-full creamy-gradient text-on-primary font-bold py-4 rounded-full hover:scale-[1.02] hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed"
                         >
                             {isAdding ? <Loader2 className="animate-spin" size={20} /> : <ShoppingBag size={20} />}
-                            {isAdding ? "Adding to cart..." : `Add ${quantity} to Cart • ${(product.price * quantity).toLocaleString()} Ar`}
+                            {isAdding ? "Ajout au panier..." : `Ajouter ${quantity} au Panier • ${(product.price * quantity).toLocaleString()} Ar`}
                         </button>
                     </div>
                 </div>

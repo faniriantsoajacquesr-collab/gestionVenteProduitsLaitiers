@@ -6,6 +6,8 @@ import Contact from './components/Pages/Contact';
 import SignUpPage from './components/Pages/SignUp';
 import CheckoutPage from './components/Pages/CheckoutPage';
 import LoginPage from './components/Pages/Login';
+import ProfilePage from './components/Pages/ProfilePage';
+import OrderTrackingPage from './components/Pages/Orders';
 
 
 export const routes: RouteObject[] = [
@@ -28,6 +30,15 @@ export const routes: RouteObject[] = [
             {
                 path: 'checkout',
                 element: <CheckoutPage />,
+            },
+           
+            {
+                path: 'orders',
+                element: <OrderTrackingPage />,
+            },
+             {
+                path: 'profile',
+                element: <ProfilePage />,
             },
         ],
     },

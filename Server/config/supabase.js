@@ -6,7 +6,20 @@ import path from "path";
 dotenv.config();
 dotenv.config({ path: path.resolve(process.cwd(), 'config/.env') });
 
-export const supabaseUrl = process.env.VITE_SUPABASE_URL;
-export const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY;
+export const supabaseUrl = process.env.SUPABASE_URL;
+export const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
+export const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error('Missing SUPABASE_URL or SUPABASE_ANON_KEY in Server/config/.env');
+}
+
+if (!supabaseServiceRoleKey) {
+  console.warn('Warning: SUPABASE_SERVICE_ROLE_KEY is not set. adminSupabase will use the anon key and may fail due to RLS.');
+}
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const adminSupabase = createClient(
+  supabaseUrl,
+  supabaseServiceRoleKey ?? supabaseAnonKey
+);

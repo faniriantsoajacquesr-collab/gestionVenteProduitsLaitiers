@@ -1,5 +1,5 @@
-import { supabase } from '../config/supabase.js';
-import { slugify } from '../utils/slugify.js';
+import { supabase } from '../../config/supabase.js';
+import { slugify } from '../../utils/slugify.js';
 
 // 1. GET ALL PRODUCTS (With Primary Image)
 export const getProducts = async (req, res) => {

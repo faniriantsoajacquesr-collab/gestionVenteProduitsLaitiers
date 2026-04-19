@@ -10,7 +10,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ name, description, price, imageUrl, onOpen }: ProductCardProps) {
     return (
-        <div onClick={onOpen} className="group bg-surface-container-lowest rounded-xl p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer">
+        <div onClick={onOpen} className="group max-w-md mx-auto bg-surface-container-lowest rounded-xl p-4 transition-all duration-500 hover:shadow-lg hover:translate-y-[-8px] cursor-pointer">
             <div className="relative aspect-[4/5] bg-surface-container-low rounded-lg overflow-hidden mb-6">
                 <img src={imageUrl} alt={name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>

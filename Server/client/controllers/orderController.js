@@ -1,6 +1,5 @@
 export const createOrder = async (req, res) => {
-  const userId = req.user.id;
-  const { deliveryAddress, deliveryDate } = req.body;
+  const { userId, deliveryAddress, deliveryDate, firstName, lastName, phoneNumber, deliverySpeed, paymentMethod } = req.body;
 
   try {
     const db = req.supabase;
@@ -36,7 +35,12 @@ export const createOrder = async (req, res) => {
         user_id: userId, 
         total_amount: totalAmount, 
         delivery_address: deliveryAddress,
-        delivery_date: deliveryDate,
+        delivery_date: deliveryDate || null,
+        first_name: firstName,
+        last_name: lastName,
+        contact_phone: phoneNumber,
+        delivery_speed: deliverySpeed,
+        payment_method: paymentMethod,
         status: 'pending' 
       }])
       .select()
@@ -84,7 +88,7 @@ export const getMyOrders = async (req, res) => {
 
   const { data, error } = await db
     .from('orders')
-    .select('*, order_items(*, products(name))')
+    .select('*, order_items(*, products(name, product_gallery(image_url)))')
     .eq('user_id', req.user.id)
     .order('created_at', { ascending: false });
 

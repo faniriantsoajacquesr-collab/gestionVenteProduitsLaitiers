@@ -100,7 +100,7 @@ export default function ProductNavbar({
         <Button variant="outline" className="w-full justify-between">
           {title}
           <span className="text-xs text-outline-variant">
-            {filters[type].length > 0 ? `${filters[type].length} selected` : 'Select options'}
+            {filters[type].length > 0 ? `${filters[type].length} sélectionnés` : 'Sélectionner'}
           </span>
         </Button>
       </DropdownMenuTrigger>
@@ -209,7 +209,7 @@ export default function ProductNavbar({
             <Input
               ref={inputRef}
               type="text"
-              placeholder="Search products..."
+              placeholder="Rechercher des produits..."
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
               className="pl-10 pr-4 py-2 text-sm rounded-lg border border-outline bg-surface-container placeholder-on-surface-variant focus:border-primary focus:ring-1 focus:ring-primary-container w-full"
@@ -223,7 +223,7 @@ export default function ProductNavbar({
         <div className="p-4 border-b border-outline/20">
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-on-surface">Filters</h3>
+              <h3 className="text-sm font-semibold text-on-surface">Filtres</h3>
               {(filters.category.length > 0 || filters.milkType.length > 0 || filters.dietary.length > 0) && (
                 <Button
                   variant="ghost"
@@ -235,24 +235,24 @@ export default function ProductNavbar({
                   }}
                   className="text-xs text-outline-variant hover:text-on-surface h-auto p-1"
                 >
-                  Clear all
+                  Réinitialiser
                 </Button>
               )}
             </div>
             <FilterSection 
-              title="Product Category" 
+              title="Catégorie" 
               type="category" 
               open={isCategoryOpen} 
               onOpenChange={setIsCategoryOpen} 
             />
             <FilterSection 
-              title="Milk Type" 
+              title="Type de lait" 
               type="milkType" 
               open={isMilkTypeOpen} 
               onOpenChange={setIsMilkTypeOpen} 
             />
             <FilterSection 
-              title="Dietary" 
+              title="Régime" 
               type="dietary" 
               open={isDietaryOpen} 
               onOpenChange={setIsDietaryOpen} 

@@ -1,4 +1,4 @@
-import { supabase } from '../config/supabase.js';
+import { supabase } from '../../config/supabase.js';
 
 // 1. SIGN UP (Inscription)
 export const register = async (req, res) => {

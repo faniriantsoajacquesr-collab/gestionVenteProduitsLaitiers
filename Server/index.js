@@ -1,8 +1,18 @@
 import dotenv from 'dotenv';
-// Load environment variables immediately from the correct path
-dotenv.config({ path: './config/.env' });
-
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// 1. Get absolute path to the current directory
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// 2. Load environment variables using an absolute path to the config folder
+const envFound = dotenv.config({ path: path.resolve(__dirname, 'config', '.env') });
+if (envFound.error) {
+  console.warn("⚠️ Warning: Could not find .env file at the specified path.");
+}
+
 import cors from 'cors';
 import morgan from 'morgan'; // For logging requests in the terminal
 
@@ -13,15 +23,25 @@ import cartRoutes from './client/routes/cartRoutes.js';
 import orderRoutes from './client/routes/orderRoutes.js';
 import userRoutes from './client/routes/userRoutes.js';
 
+// Admin Routers
+import adminProductRoutes from './admin/routes/productRoutes.js';
+import adminOrderRoutes from './admin/routes/orderRoutes.js';
+import adminUserRoutes from './admin/routes/userRoutes.js';
+import adminUploadRoutes from './admin/routes/uploadRoutes.js';
+
 import { supabase } from './config/supabase.js';
 
 const app = express();
 
 // --- 1. GLOBAL MIDDLEWARE ---
 
-// Allow your React app to access this API
+// Allow your React apps to access this API
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173', // Vite default
+  origin: [
+    process.env.CLIENT_URL || 'http://localhost:5173',    // Client app
+    'http://localhost:5174',                               // Admin app
+    'http://localhost:5175',                               // Backup port
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
@@ -31,6 +51,9 @@ app.use(morgan('dev'));
 
 // Parse incoming JSON requests
 app.use(express.json());
+
+// Serve static files (for images stored in a local public or uploads folder)
+app.use('/uploads', express.static(path.join(process.cwd(), 'public/uploads')));
 
 // Global middleware to attach Supabase client to the request object
 app.use((req, res, next) => {
@@ -43,6 +66,7 @@ app.use((req, res, next) => {
 // Auth: Login, Register, Profile Me
 app.use('/api/auth', authRoutes);
 
+// Client Routes
 // Products: Catalog, Details, Admin CRUD
 app.use('/api/products', productRoutes);
 
@@ -54,6 +78,19 @@ app.use('/api/orders', orderRoutes);
 
 // Users: Admin management and Profile updates
 app.use('/api/users', userRoutes);
+
+// Admin Routes
+// Admin Products Management
+app.use('/api/admin/products', adminProductRoutes);
+
+// Admin Orders Management
+app.use('/api/admin/orders', adminOrderRoutes);
+
+// Admin Users Management
+app.use('/api/admin/users', adminUserRoutes);
+
+// Admin Upload Management
+app.use('/api/admin/upload', adminUploadRoutes);
 
 // --- 3. BASIC HEALTH CHECK ---
 app.get('/', (req, res) => {
