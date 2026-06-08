@@ -125,7 +125,8 @@ export default function AdminLoginPage({ onLoginSuccess }: LoginPageProps) {
         toast.dismiss('role-check')
         setLoginStep('success')
         
-        // Store token
+        // Store the full session data (including refresh_token for automatic refresh)
+        // Supabase will handle token refresh automatically via its session management
         localStorage.setItem('admin_auth_token', data.session.access_token)
         console.log('[Login] Connexion réussie - Token stocké')
 

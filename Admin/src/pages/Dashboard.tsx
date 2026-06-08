@@ -112,8 +112,6 @@ export default function Dashboard() {
                   <Icon className={`w-6 h-6 ${stat.color}`} />
                 </div>
                 <span className="flex items-center gap-1 text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-full">
-                  <TrendingUp className="w-3 h-3" />
-                  {stat.change}
                 </span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-bold text-on-surface">{stat.value}</h3>

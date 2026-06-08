@@ -4,20 +4,24 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 
 const getAuthToken = async () => {
   try {
-    // First, check localStorage for manually stored token
-    const storedToken = localStorage.getItem('admin_auth_token')
-    if (storedToken) {
-      console.log('[API] Token retrieved from localStorage')
-      return storedToken
+    // Always try to get the latest token from Supabase session first
+    // This ensures we get a fresh token and handles automatic refresh
+    const { data: { session }, error: sessionError } = await supabase.auth.getSession()
+    
+    if (sessionError) {
+      console.warn('[API] Error getting session:', sessionError.message)
     }
 
-    // Then try to get token from Supabase session
-    const { data: { session } } = await supabase.auth.getSession()
     if (session?.access_token) {
-      console.log('[API] Token retrieved from Supabase session')
-      // Store it for future use
-      localStorage.setItem('admin_auth_token', session.access_token)
+      console.log('[API] Token retrieved from Supabase session (fresh)')
       return session.access_token
+    }
+
+    // Fallback to localStorage as backup
+    const storedToken = localStorage.getItem('admin_auth_token')
+    if (storedToken) {
+      console.log('[API] Token retrieved from localStorage (fallback)')
+      return storedToken
     }
   } catch (e) {
     console.error('[API] Error getting auth token:', e)
@@ -38,14 +42,24 @@ const apiRequest = async (endpoint, options = {}) => {
   // Add Authorization header if token exists
   if (token) {
     headers['Authorization'] = `Bearer ${token}`
+    console.log('[API] Token length:', token.length)
+    console.log('[API] Token preview:', token.substring(0, 20) + '...')
+  } else {
+    console.warn('[API] No token found for request!')
   }
 
-  console.log(`[API Request] ${options.method || 'GET'} ${API_URL}${endpoint}`);
+  console.log(`[API Request] ${options.method || 'GET'} ${API_URL}${endpoint}`, {
+    hasAuth: !!token,
+    headers: Object.keys(headers)
+  });
+  
   try {
     const response = await fetch(`${API_URL}${endpoint}`, {
       ...options,
       headers,
     })
+
+    console.log(`[API Response] Status: ${response.status}`);
 
     if (!response.ok) {
       const error = await response.json().catch(() => ({ error: 'Request failed' }))

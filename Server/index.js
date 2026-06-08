@@ -35,6 +35,18 @@ const app = express();
 
 // --- 1. GLOBAL MIDDLEWARE ---
 
+// Log all incoming requests
+app.use((req, res, next) => {
+  console.log('[ALL Requests]', {
+    method: req.method,
+    path: req.path,
+    origin: req.get('origin'),
+    hasAuth: !!req.headers.authorization,
+    timestamp: new Date().toISOString()
+  });
+  next();
+});
+
 // Allow your React apps to access this API
 app.use(cors({
   origin: [
