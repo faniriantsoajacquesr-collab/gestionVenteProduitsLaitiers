@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { DropdownMenuAvatar } from "./ProfileBtn";
+import { ProfileSection } from "./ProfileBtn";
 import { useSidebar } from "../../contexts/SidebarContext";
 import { ShoppingCartIcon } from "lucide-react";
 
@@ -50,10 +50,11 @@ function Navbar () {
                
             </div>
             <div className="flex items-center space-x-5">
-                <button onClick={() => toggleCart(true)} className="text-sky-700 dark:text-sky-400 transition-all active:opacity-80 active:scale-95">
-                    <ShoppingCartIcon></ShoppingCartIcon>
+                <button onClick={() => toggleCart(true)} className="flex items-center gap-2 text-sky-700 dark:text-sky-400 transition-all active:opacity-80 active:scale-95 group px-3 py-2 rounded-full hover:bg-sky-50 dark:hover:bg-sky-900/20">
+                    <ShoppingCartIcon size={20} />
+                    <span className="text-sm font-bold hidden sm:inline">Mon panier</span>
                 </button>
-                <DropdownMenuAvatar />
+                <ProfileSection />
             </div>
         </div>
     </nav>

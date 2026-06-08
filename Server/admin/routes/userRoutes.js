@@ -3,8 +3,8 @@ import {
   getAllUsers, 
   getUserById, 
   createUser, 
-  updateUser, 
-  deleteUser 
+  updateUser,
+  deleteUserAccount
 } from '../controllers/userController.js';
 import { protect, adminOnly } from '../middleware/authMiddleware.js';
 
@@ -17,6 +17,6 @@ router.get('/:id', getUserById);
 // Protected sensitive operations
 router.post('/', protect, adminOnly, createUser);
 router.put('/:id', protect, adminOnly, updateUser);
-router.delete('/:id', protect, adminOnly, deleteUser);
+router.delete('/:id', protect, adminOnly, deleteUserAccount);
 
 export default router;

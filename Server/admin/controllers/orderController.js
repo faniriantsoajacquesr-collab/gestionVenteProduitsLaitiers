@@ -16,13 +16,18 @@ export const getAllOrders = async (req, res) => {
     }
 
     // B. Récupérer les profils pour tous les user_id des commandes
-    const userIds = [...new Set(orders.map(o => o.user_id))];
-    const { data: profiles, error: profilesError } = await supabase
-      .from('profiles')
-      .select('id, first_name, last_name, phone_number')
-      .in('id', userIds);
+    // Filter out null/undefined/'null' values to avoid invalid UUID queries
+    const userIds = [...new Set(orders.map(o => o.user_id))].filter(id => id && id !== 'null');
+    let profiles = [];
+    if (userIds.length > 0) {
+      const { data, error: profilesError } = await supabase
+        .from('profiles')
+        .select('id, first_name, last_name, phone_number')
+        .in('id', userIds);
 
-    if (profilesError) throw profilesError;
+      if (profilesError) throw profilesError;
+      profiles = data;
+    }
 
     // C. Fusionner les données manuellement
     const ordersWithProfiles = orders.map(order => ({

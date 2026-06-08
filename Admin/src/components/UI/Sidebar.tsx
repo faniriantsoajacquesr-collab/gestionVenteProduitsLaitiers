@@ -6,7 +6,7 @@ type PageId = 'dashboard' | 'products' | 'clients' | 'orders'
 const menuItems = [
   { id: 'dashboard' as PageId, label: 'Tableau de bord', icon: Home },
   { id: 'products' as PageId, label: 'Produits', icon: Package },
-  { id: 'clients' as PageId, label: 'Clients', icon: Users },
+  { id: 'clients' as PageId, label: 'Utilisateurs', icon: Users },
   { id: 'orders' as PageId, label: 'Commandes', icon: ShoppingCart },
 ]
 
